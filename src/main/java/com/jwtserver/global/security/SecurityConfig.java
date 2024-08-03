@@ -42,6 +42,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         ;
 
         // --------------- 인증 예외 처리 ---------------
+        /*
+            Security 가 발생시키는 예외는 ControllerAdvice 가 잡지 못하고 Security 가 자체적으로 처리합니다.
+            따라서 예외 컨트롤러로 리다이렉트 시킨 후 예외 처리를 해주어야 합니다.
+         */
         http
             .exceptionHandling()
             .authenticationEntryPoint(new AuthenticationEntryPoint() {
