@@ -12,6 +12,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 
+/*
+	API 를 호출할 때 사용되는 인증필터 입니다.
+*/
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends GenericFilter {
 

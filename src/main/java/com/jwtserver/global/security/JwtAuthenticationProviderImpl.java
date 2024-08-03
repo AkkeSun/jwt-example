@@ -18,6 +18,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
+/*
+	JWT 토큰 생성 및 유효성 검증, 인증 객채 생성을 위한 유틸 클래스
+	인증객채를 생성할 때에는 UserDetailsService 를 사용하여 DB 조회를 하지 않고
+	JWT 내에 있는 사용자 정보 (username, role) 를 기반으로 생성합니다.
+*/
 @Slf4j
 @Component
 @RequiredArgsConstructor

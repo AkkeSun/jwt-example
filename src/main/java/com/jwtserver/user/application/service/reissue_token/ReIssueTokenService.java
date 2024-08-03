@@ -16,11 +16,9 @@ import com.jwtserver.user.domain.RefreshToken;
 import com.jwtserver.user.domain.UserDomain;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
