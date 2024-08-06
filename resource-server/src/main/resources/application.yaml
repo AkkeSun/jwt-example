@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: resource-server
+
+server:
+  port: 8081
+
+jwt:
+  token:
+    secret-key: hello-jwt

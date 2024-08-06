@@ -43,4 +43,5 @@
 
 ## 5. 참고사항
 
-- 클라이언트 사용 시나리오는 ClientTest 를 참고해주세요
+- dev : springboot 2.x
+- dev-v2 : springboot 3.x / auth-server, resource-server 모듈 분리
