@@ -1,7 +1,5 @@
 package com.sweettracker.resourceserver.global.security;
 
-import com.sweettracker.resourceserver.global.exception.CustomAuthenticationException;
-import com.sweettracker.resourceserver.global.exception.ErrorCode;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import jakarta.servlet.FilterChain;
@@ -36,28 +34,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = request.getHeader("Authorization");
 
         try {
-            Claims jwt = parseJwtToken(token);
+            token = token.replace("Bearer ", "");
+            Claims jwt = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
             if (!jwt.getExpiration().before(new Date())) {
                 SecurityContextHolder.getContext().setAuthentication(makeAuthenticationToken(jwt));
             }
 
-        } catch (Exception e) {
-            filterChain.doFilter(request, response);
-            return;
+        } catch (Exception ignored) {
+            // 예외는 authenticationEntryPoint 에서 처리합니다.
         }
-        filterChain.doFilter(request, response);
-    }
 
-    private Claims parseJwtToken(String token) {
-        try {
-            token = token.replace("Bearer ", "");
-            return Jwts.parser()
-                .setSigningKey(secretKey)
-                .parseClaimsJws(token)
-                .getBody();
-        } catch (Exception e) {
-            throw new CustomAuthenticationException(ErrorCode.INVALID_ACCESS_TOKEN);
-        }
+        filterChain.doFilter(request, response);
     }
 
     private Authentication makeAuthenticationToken(Claims claims) {
