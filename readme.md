@@ -6,4 +6,4 @@
 ### 브랜치 정보
 
 - dev : springboot 2.x
-- dev-v2 : springboot 3.x / auth-server, resource-server 모듈 분리
+- master : springboot 3.x / auth-server, resource-server 모듈 분리
