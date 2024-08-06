@@ -25,10 +25,13 @@ public class JwtAuthenticationFilter extends GenericFilter {
         FilterChain filterChain) throws IOException, ServletException {
         String token = ((HttpServletRequest) servletRequest).getHeader("Authorization");
 
-        // 토큰 유효성 검증 후 유효한 토큰이라면 인증 처리 합니다.
-        if (StringUtils.hasText(token) && jwtProvider.validateTokenExceptExpiration(token)) {
-            Authentication authentication = jwtProvider.getAuthentication(token);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+        try {
+            if (StringUtils.hasText(token) && jwtProvider.validateTokenExceptExpiration(token)) {
+                Authentication authentication = jwtProvider.getAuthentication(token);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+        } catch (Exception ignored) {
+            // 예외는 authenticationEntryPoint 에처 처리됩니다.
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }
