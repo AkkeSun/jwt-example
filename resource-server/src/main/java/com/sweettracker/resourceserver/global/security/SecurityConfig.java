@@ -35,8 +35,8 @@ public class SecurityConfig {
             // --------------- 인가 정책 ---------------
             .authorizeHttpRequests(auth -> {
                 auth.requestMatchers("/errors/invalid-token").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/products/**").hasRole("USER")
-                    .requestMatchers(HttpMethod.POST, "/products").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "/products").hasAnyRole("USER", "ADMIN")
+                    .requestMatchers(HttpMethod.GET, "/products/**").hasRole("ADMIN")
                     .anyRequest().authenticated();
             })
 
@@ -59,10 +59,10 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOriginPattern("http://localhost:8080");
+        configuration.addAllowedOriginPattern("*");
+        configuration.addAllowedHeader("*");
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
-        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

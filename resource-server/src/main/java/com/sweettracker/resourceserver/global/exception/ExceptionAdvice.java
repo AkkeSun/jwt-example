@@ -27,4 +27,17 @@ public class ExceptionAdvice {
                 .build()
         );
     }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(CustomNotFoundException.class)
+    ApiResponse<Object> notFoundException(CustomNotFoundException e) {
+        return ApiResponse.of(
+            HttpStatus.NOT_FOUND,
+            ErrorResponse.builder()
+                .errorCode(e.getErrorCode().getCode())
+                .errorMessage(e.getErrorCode().getMessage())
+                .build()
+        );
+    }
+
 }

@@ -2,6 +2,12 @@ spring:
   application:
     name: resource-server
 
+  datasource:
+    url: jdbc:h2:mem:chameleon;MODE=MySQL
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
 server:
   port: 8081
 
