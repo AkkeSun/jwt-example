@@ -49,6 +49,15 @@ class UserPersistenceAdapter implements FindUserPort {
                 .role(Role.ROLE_USER)
                 .build());
         }
+
+        if (!userRepository.existsByUsername("admin")) {
+            userRepository.save(UserEntity.builder()
+                .username("admin")
+                .password(aesUtil.encryptText("1234"))
+                .hobby("study")
+                .role(Role.ROLE_ADMIN)
+                .build());
+        }
     }
 
 }
